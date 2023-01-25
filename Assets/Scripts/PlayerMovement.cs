@@ -6,11 +6,13 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     public float moveSpeed = 5f;
     private Vector2 movement;
+    public Vector2 savedPosition;
     private GameManager manager;
 
     void Start()
     {
         manager = FindObjectOfType<GameManager>();
+        savedPosition = rigidBody.position;
     }
 
     // Update is called once per frame
@@ -35,5 +37,20 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rigidBody.MovePosition(rigidBody.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    public void Save()
+    {
+        savedPosition = rigidBody.position;
+        Debug.Log("testSave");
+        Debug.Log(savedPosition);
+        Debug.Log(rigidBody.position);
+    }
+    public void Load()
+    {
+        rigidBody.position = savedPosition;
+        Debug.Log("testLoad");
+        Debug.Log(savedPosition);
+        Debug.Log(rigidBody.position);
     }
 }
