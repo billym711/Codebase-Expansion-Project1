@@ -8,9 +8,13 @@ public class Player : MonoBehaviour
     public HealthBar healthBar;
     public int maxHealth = 100;
     public int currentHealth;
+    public int savedHealth;
     public List<Key> keys;
     public int commonKeysAmount;
+    public int savedKeysAmount;
     public KeyUI keyUI;
+   
+
 
     public AudioSource hitSound;
     public AudioSource healSound;
@@ -76,5 +80,18 @@ public class Player : MonoBehaviour
             manager.GameOver();
         }
         Destroy(gameObject);
+    }
+    public void Save()
+    {
+        savedKeysAmount = commonKeysAmount;
+        savedHealth = currentHealth;
+    }
+    public void Load()
+    {
+        currentHealth = savedHealth;
+        commonKeysAmount = savedKeysAmount;
+        healthBar.SetHealth(currentHealth);
+        keyUI.ShowKeysAmount();
+
     }
 }

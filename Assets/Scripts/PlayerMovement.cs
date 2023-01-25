@@ -42,15 +42,9 @@ public class PlayerMovement : MonoBehaviour
     public void Save()
     {
         savedPosition = rigidBody.position;
-        Debug.Log("testSave");
-        Debug.Log(savedPosition);
-        Debug.Log(rigidBody.position);
     }
     public void Load()
     {
         rigidBody.position = savedPosition;
-        Debug.Log("testLoad");
-        Debug.Log(savedPosition);
-        Debug.Log(rigidBody.position);
     }
 }
