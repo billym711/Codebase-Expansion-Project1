@@ -84,7 +84,8 @@ public class Enemy1 : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        currentHealth = maxHealth;
+        this.gameObject.SetActive(false);
         Instantiate(deathEffect, transform.position, transform.rotation);
     }
 }

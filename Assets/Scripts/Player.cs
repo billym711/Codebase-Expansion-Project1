@@ -10,10 +10,22 @@ public class Player : MonoBehaviour
     public int currentHealth;
     public int savedHealth;
     public List<Key> keys;
+    public List<Key> savedKeys;
     public int commonKeysAmount;
     public int savedKeysAmount;
     public KeyUI keyUI;
-   
+    [SerializeField]
+    public List<Enemy1> enemy1s;
+    public List<Enemy1> savedEnemy1s;
+    [SerializeField]
+    public List<Enemy2> enemy2s;
+    public List<Enemy2> savedEnemy2s;
+    [SerializeField]
+    public List<Enemy3> enemy3s;
+    public List<Enemy3> savedEnemy3s;
+    [SerializeField]
+    public List<Enemy4> enemy4s;
+    public List<Enemy4> savedEnemy4s;
 
 
     public AudioSource hitSound;
@@ -85,6 +97,11 @@ public class Player : MonoBehaviour
     {
         savedKeysAmount = commonKeysAmount;
         savedHealth = currentHealth;
+        keys.Clear();
+        savedEnemy1s = enemy1s;
+        savedEnemy2s = enemy2s;
+        savedEnemy3s = enemy3s;
+        savedEnemy4s = enemy4s;
     }
     public void Load()
     {
@@ -92,6 +109,14 @@ public class Player : MonoBehaviour
         commonKeysAmount = savedKeysAmount;
         healthBar.SetHealth(currentHealth);
         keyUI.ShowKeysAmount();
+        foreach (Key key in keys)
+        {
+            key.gameObject.SetActive(true);
+        }
+        foreach (Enemy1 enemy1 in savedEnemy1s)
+        {
+            enemy1.gameObject.SetActive(true);
+        }
 
     }
 }
