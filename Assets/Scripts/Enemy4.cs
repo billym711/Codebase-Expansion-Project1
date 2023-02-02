@@ -37,7 +37,9 @@ public class Enemy4 : MonoBehaviour
     private Transform player;
 
     private float timer;
-    
+    public Vector3 initialPos;
+    [SerializeField]
+    public Player playerObj;
     void Start()
     {
         manager = FindObjectOfType<GameManager>();
@@ -45,6 +47,7 @@ public class Enemy4 : MonoBehaviour
     	currentHealth = maxHealth;
     	timeBtwShots = startTimeBtwShots;
     	transform.localPosition = posExtra1;
+        initialPos = this.gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -172,10 +175,12 @@ public class Enemy4 : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        currentHealth = maxHealth;
+        this.gameObject.SetActive(false);
         Instantiate(deathEffect, transform.position, transform.rotation);
+        playerObj.enemy4s.Remove(this);
     }
-    
+
     private void OnDrawGizmosSelected()
     { // Ativacao do personagem
         float drawStartMovementMinX = startMovementMinX;

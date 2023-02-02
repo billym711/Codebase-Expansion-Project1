@@ -13,26 +13,20 @@ public class Door : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             player = collision.gameObject.GetComponent<Player>();
-
-            foreach(Key k in player.keys)
+            if (player.commonKeysAmount > 0 && type == keyType.COMMON)
             {
-                if (k.type == type)
-                {
-                    Destroy(this.transform.parent.gameObject);
+                Destroy(this.transform.parent.gameObject);
 
-                    if (k.type == keyType.COMMON)
-                    {
-                        player.commonKeysAmount -= 1;
-                        player.keyUI.ShowKeysAmount();
-                    } else if (type == keyType.BOSS)
-                    {
-                        keyUI.HideBossKey();
-                    }
+                player.commonKeysAmount -= 1;
+                player.keyUI.ShowKeysAmount();
+            }
+            if (type == keyType.BOSS)
+            {
+                keyUI.HideBossKey();
+            }
+        }
 
-                    player.keys.Remove(k);
+
                     return;
                 }            
             }
-        }
-    }
-}

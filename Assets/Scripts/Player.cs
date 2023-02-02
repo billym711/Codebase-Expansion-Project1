@@ -98,10 +98,10 @@ public class Player : MonoBehaviour
         savedKeysAmount = commonKeysAmount;
         savedHealth = currentHealth;
         keys.Clear();
-        savedEnemy1s = enemy1s;
-        savedEnemy2s = enemy2s;
-        savedEnemy3s = enemy3s;
-        savedEnemy4s = enemy4s;
+        savedEnemy1s = new List<Enemy1>(enemy1s);
+        savedEnemy2s = new List<Enemy2>(enemy2s);
+        savedEnemy3s = new List<Enemy3>(enemy3s);
+        savedEnemy4s = new List<Enemy4>(enemy4s);
     }
     public void Load()
     {
@@ -116,7 +116,25 @@ public class Player : MonoBehaviour
         foreach (Enemy1 enemy1 in savedEnemy1s)
         {
             enemy1.gameObject.SetActive(true);
+            enemy1.gameObject.transform.position = enemy1.initialPos;
         }
+        foreach (Enemy2 enemy2 in savedEnemy2s)
+        {
+            enemy2.gameObject.SetActive(true);
+            enemy2.gameObject.transform.position = enemy2.initialPos;
 
+        }
+        foreach (Enemy3 enemy3 in savedEnemy3s)
+        {
+            enemy3.gameObject.SetActive(true);
+            enemy3.gameObject.transform.position = enemy3.initialPos;
+
+        }
+        foreach (Enemy4 enemy4 in savedEnemy4s)
+        {
+            enemy4.gameObject.SetActive(true);
+            enemy4.gameObject.transform.position = enemy4.initialPos;
+
+        }
     }
 }

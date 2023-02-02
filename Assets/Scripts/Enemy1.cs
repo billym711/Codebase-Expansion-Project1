@@ -16,12 +16,16 @@ public class Enemy1 : MonoBehaviour
     public float pushback = 50000;
 
     private float timer;
+    public Vector3 initialPos;
+    [SerializeField]
+    public Player player;
 
     // Start is called before the first frame update
     void Start()
     {
         halfLife = false;
         currentHealth = maxHealth;
+        initialPos = this.gameObject.transform.position;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -87,5 +91,6 @@ public class Enemy1 : MonoBehaviour
         currentHealth = maxHealth;
         this.gameObject.SetActive(false);
         Instantiate(deathEffect, transform.position, transform.rotation);
+        player.enemy1s.Remove(this);
     }
 }

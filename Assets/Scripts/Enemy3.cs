@@ -43,9 +43,11 @@ public class Enemy3 : MonoBehaviour{
     public bool startMovement = false;
     public Vector3 posExtra1;
     public Vector3 posExtra2;
-    
-    
-    
+    public Vector3 initialPos;
+    [SerializeField]
+    public Player playerObj;
+
+
     void Start()
     {
         manager = FindObjectOfType<GameManager>();
@@ -53,7 +55,8 @@ public class Enemy3 : MonoBehaviour{
     	currentHealth = maxHealth;
     	timeBtwShots = startTimeBtwShots;
     	transform.localPosition = posExtra1;
-    	
+        initialPos = this.gameObject.transform.position;
+
     }
 
     // Update is called once per frame
@@ -186,10 +189,12 @@ public class Enemy3 : MonoBehaviour{
 
     void Die()
     {
-        Destroy(gameObject);
+        currentHealth = maxHealth;
+        this.gameObject.SetActive(false);
         Instantiate(deathEffect, transform.position, transform.rotation);
+        playerObj.enemy3s.Remove(this);
     }
-    
+
     private void OnDrawGizmosSelected()
     {
 
